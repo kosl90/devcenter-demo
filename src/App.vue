@@ -1,19 +1,28 @@
 <template>
   <div id="app">
-    <section class="header clearfix">
-      <div class="container">
-        <h1 class="logo"><a href="#"><img src="./assets/logo.png"></a></h1>
-        <nav>
-          <ul>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-example"
+          aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img class="logo" alt="Brand" src="./assets/logo.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-example">
+          <ul class="nav navbar-nav navbar-right">
             <li><a href="#">应用管理</a></li>
             <li><a href="#">论坛</a></li>
             <li><a href="#">申请记录</a></li>
             <li><a href="#">用户名</a></li>
             <li><a href="#">退出</a></li>
           </ul>
-        </nav>
+        </div>
       </div>
-    </section>
+    </nav>
     <section class="slides">
       <div id="carousel-example" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -105,34 +114,9 @@ body {
   color: #2c3e50;
 }
 
-.header {
-  height: 56px;
-  width: 100%;
-  background-color: #2e2e2e;
-
-  .logo {
-    float: left;
-    margin: 0;
-    img {
-      height: 1.5em;
-    }
-  }
-
-  nav {
-    float: right;
-
-    ol li, ul li {
-      list-style: none;
-      float: left;
-      padding-left: 16px;
-    }
-    li a {
-      color: #fff;
-      line-height: 24px;
-      padding: 16px 2px;
-      display: block;
-    }
-  }
+.logo {
+  height: 2em;
+  transform: translateY(-20%);
 }
 
 .slides {
