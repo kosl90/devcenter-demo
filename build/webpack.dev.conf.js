@@ -25,6 +25,7 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new webpack.ProvidePlugin({
       '$': 'jquery',
+      'jQuery': 'jquery',
     }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.optimize.OccurrenceOrderPlugin(),
