@@ -30,21 +30,26 @@
         </section>
       </div>
     </section>
-    <footer>
-      This is Footer.
-    </footer>
+    <fixed-zone></fixed-zone>
+    <section class="footer">
+      <footer class="container">
+        This is Footer.
+      </footer>
+    </section>
   </div>
 </template>
 
 <script>
 import Hello from './components/Hello';
 import News from './components/News';
+import FixedZone from './components/FixedZone';
 
 export default {
   name: 'app',
   components: {
     Hello,
     News,
+    FixedZone,
   },
   data() {
     return {
