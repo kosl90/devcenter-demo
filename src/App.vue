@@ -48,11 +48,7 @@
       </div>
     </section>
     <fixed-zone></fixed-zone>
-    <section class="footer">
-      <footer class="container">
-        This is Footer.
-      </footer>
-    </section>
+    <web-footer></web-footer>
   </div>
 </template>
 
@@ -60,6 +56,7 @@
 import Hello from './components/Hello';
 import News from './components/News';
 import FixedZone from './components/FixedZone';
+import WebFooter from './components/WebFooter';
 
 export default {
   name: 'app',
@@ -67,6 +64,7 @@ export default {
     Hello,
     News,
     FixedZone,
+    WebFooter,
   },
   data() {
     return {
