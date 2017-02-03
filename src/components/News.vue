@@ -12,7 +12,6 @@ export default {
   name: 'News',
   props: {
     items: {
-      /* type: Object, */
       required: true,
     },
     pageLink: String,
@@ -26,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .title {
-  line-height: 33px;
+  line-height: 24px;
   overflow: hidden;
   zoom: 1;
   padding-bottom: 20px;
