@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-default header">
+    <nav class="navbar navbar-default navbar-fixed-top header">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-example"
@@ -118,7 +118,7 @@ body {
   margin-bottom: 0;
   .logo {
     height: 2em;
-    transform: translateY(-20%);
+    margin-top: -20%;
   }
 }
 
