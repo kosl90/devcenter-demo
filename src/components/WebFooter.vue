@@ -22,6 +22,7 @@
     padding: 18px 0;
     font-size: 12px;
     background-color: #d3d3d3;
+
     p {
       margin: 0;
     }

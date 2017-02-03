@@ -70,6 +70,16 @@ export default {
     return {
       prodNews: [
                 { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
+                { link: 'https://baidu.com', title: '百度' },
       ],
       siteNews: [
                 { link: 'https://baidu.com', title: '百度' },
@@ -83,6 +93,11 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
