@@ -1,25 +1,33 @@
 <template>
   <div id="app">
     <section class="header clearfix">
-      <span class="banner"><a href="#"><img src="./assets/logo.png"></a></span>
-      <nav>
-        <ul>
-          <li><a href="#">应用管理</a></li>
-          <li><a href="#">论坛</a></li>
-          <li><a href="#">申请记录</a></li>
-          <li><a href="#">用户名</a></li>
-          <li><a href="#">退出</a></li>
-        </ul>
-      </nav>
+      <div class="container">
+        <h1 class="logo"><a href="#"><img src="./assets/logo.png"></a></h1>
+        <nav>
+          <ul>
+            <li><a href="#">应用管理</a></li>
+            <li><a href="#">论坛</a></li>
+            <li><a href="#">申请记录</a></li>
+            <li><a href="#">用户名</a></li>
+            <li><a href="#">退出</a></li>
+          </ul>
+        </nav>
+      </div>
     </section>
     <section class="slides">
     this is slide.
     </section>
     <section class="news container">
       <div class="row">
-        <section class="prod-news col-md-4">A</section>
-        <section class="site-news col-md-4">B</section>
-        <section class="forum-news col-md-4">C</section>
+        <section class="prod-news col-md-4">
+          <news title="产品更新" :items="prodNews"></news>
+        </section>
+        <section class="site-news col-md-4">
+          <news title="资讯动态" :items="siteNews"></news>
+        </section>
+        <section class="forum-news col-md-4">
+          <news title="论坛" :items="forumNews"></news>
+        </section>
       </div>
     </section>
     <footer>
@@ -30,11 +38,26 @@
 
 <script>
 import Hello from './components/Hello';
+import News from './components/News';
 
 export default {
   name: 'app',
   components: {
     Hello,
+    News,
+  },
+  data() {
+    return {
+      prodNews: [
+                { link: 'https://baidu.com', title: '百度' },
+      ],
+      siteNews: [
+                { link: 'https://baidu.com', title: '百度' },
+      ],
+      forumNews: [
+                { link: 'https://baidu.com', title: '百度' },
+      ],
+    };
   },
 };
 </script>
@@ -48,9 +71,13 @@ export default {
 }
 
 .header {
+  height: 56px;
   width: 100%;
-  .banner {
+  background-color: #2e2e2e;
+
+  .logo {
     float: left;
+    margin: 0;
     img {
       height: 1.5em;
     }
@@ -58,9 +85,17 @@ export default {
 
   nav {
     float: right;
+
     ol li, ul li {
       list-style: none;
       float: left;
+      padding-left: 16px;
+    }
+    li a {
+      color: #fff;
+      line-height: 24px;
+      padding: 16px 2px;
+      display: block;
     }
   }
 }
