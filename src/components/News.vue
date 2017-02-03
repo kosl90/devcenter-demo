@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="title"><h3 class="name">{{ title }}</h3><a class="more" href="#">更多 >></a></div>
+  <div class="title"><h3 class="name">{{ title }}</h3><a v-if="pageLink" class="more" :href="pageLink">更多 >></a></div>
   <ul class="content">
     <li class="item" v-for="item in items"><a :href="item.link" target="_blank">{{item.title}}</a></li>
   </ul>
@@ -15,6 +15,7 @@ export default {
       /* type: Object, */
       required: true,
     },
+    pageLink: String,
     title: {
       type: String,
       required: true,

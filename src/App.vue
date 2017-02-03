@@ -15,12 +15,29 @@
       </div>
     </section>
     <section class="slides">
-    this is slide.
+      <div id="carousel-example" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example" data-slide-to="1"></li>
+          <li data-target="#carousel-example" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+              <div>A</div>
+            </div>
+            <div class="item">
+              <div>B</div>
+            </div>
+            <div class="item">
+              <div>C</div>
+            </div>
+        </div>
+      </div>
     </section>
     <section class="news container">
       <div class="row">
         <section class="prod-news col-md-4">
-          <news title="产品更新" :items="prodNews"></news>
+          <news title="产品更新" :items="prodNews" pageLink="#"></news>
         </section>
         <section class="site-news col-md-4">
           <news title="资讯动态" :items="siteNews"></news>
@@ -108,5 +125,14 @@ export default {
 .slides {
   height: 28em;
   text-align:center;
+  margin-bottom: 2em;
+
+  .carousel, .carousel-inner, .carousel-inner .item {
+    height: 100%;
+    background: lightgray;
+  }
+  .carousel-inner .item:nth-child(even) {
+    background-color: lightblue;
+  }
 }
 </style>
