@@ -1,5 +1,6 @@
 <template>
   <section class="footer">
+    <!-- TODO: responsive -->
     <footer class="container">
       <section class="pull-left">
       <p>@ 2017 <a href="#">使用前必读.</a></p>

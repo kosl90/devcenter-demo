@@ -60,22 +60,24 @@
       </div>
       <web-footer></web-footer>
       <fixed-zone></fixed-zone>
+      <!-- maybe v-model is better than ref -->
+      <login-box ref='loginBox' actionURL="/login" @submit="onLogin"></login->
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
 import News from './components/News';
 import FixedZone from './components/FixedZone';
 import WebFooter from './components/WebFooter';
+import LoginBox from './components/LoginBox';
 
 export default {
   name: 'app',
   components: {
-    Hello,
     News,
     FixedZone,
     WebFooter,
+    LoginBox,
   },
   data() {
     return {
@@ -92,6 +94,17 @@ export default {
                 { link: 'https://baidu.com', title: '百度' },
       ],
     };
+  },
+  methods: {
+    onLogin(e) {
+      e.preventDefault();
+      const loginBox = this.$refs.loginBox;
+      /* eslint-disable no-console */
+      console.log(loginBox.userName);
+      console.log(loginBox.pwd);
+      console.log(loginBox.isUseLDAP);
+      loginBox.isUseLDAP = false;
+    },
   },
 };
 </script>
@@ -121,6 +134,7 @@ export default {
 }
 
 .slides {
+  margin-top: 50px;
   height: 28em;
   text-align:center;
   margin-bottom: 2em;

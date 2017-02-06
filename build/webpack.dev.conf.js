@@ -37,6 +37,10 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
-    new FriendlyErrors()
+    new FriendlyErrors(),
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[file].map',
+      columns: false,
+    })
   ]
 })
