@@ -2,6 +2,13 @@
 
 > A devcenter demo project.
 
+# TODO for new arch
+
+[ ] config details
+[ ] controller
+[ ] test
+
+
 ## Build Setup
 
 ``` bash
