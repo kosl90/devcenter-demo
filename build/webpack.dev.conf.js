@@ -38,9 +38,9 @@ module.exports = merge(baseWebpackConfig, {
       inject: true
     }),
     new FriendlyErrors(),
-    new webpack.SourceMapDevToolPlugin({
-      filename: '[file].map',
-      columns: false,
-    })
+    // new webpack.SourceMapDevToolPlugin({
+    //   filename: '[file].[hash].map',
+    //   columns: false,
+    // })
   ]
 })

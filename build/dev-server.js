@@ -4,14 +4,14 @@ if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var opn = require('opn')
+// var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing' ?
   require('./webpack.prod.conf') :
   require('./webpack.dev.conf')
 
 var session = require("express-session");
-var RedisStore = require('connect-redis')(session);
+// var RedisStore = require('connect-redis')(session);
 var bodyParser = require('body-parser');
 
 // default port where dev server listens for incoming traffic
@@ -26,14 +26,14 @@ app.use(bodyParser.urlencoded({
 }))
 
 const env = process.env;
-const sessionStore = new RedisStore({
-  host: env['sessionStoreHost'],
-  port: env['sessionStorePort'],
-  logErrors: true,
-});
+// const sessionStore = new RedisStore({
+//   host: env['sessionStoreHost'],
+//   port: env['sessionStorePort'],
+//   logErrors: true,
+// });
 
 app.use(session({
-  store: sessionStore,
+  // store: sessionStore,
   secret: env['secret'],
   resave: true,
   rolling: true,
@@ -130,7 +130,7 @@ module.exports = app.listen(port, function (err) {
   }
 
   // when env is testing, don't need open it
-  if (process.env.NODE_ENV !== 'testing') {
-    opn(uri)
-  }
+  // if (process.env.NODE_ENV !== 'testing') {
+  //   opn(uri)
+  // }
 })
