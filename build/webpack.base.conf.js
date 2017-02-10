@@ -12,7 +12,7 @@ var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 module.exports = {
   entry: {
-    app: './src/main.js'
+    app: './client/main.js'
   },
   output: {
     path: config.build.assetsRoot,
@@ -24,17 +24,16 @@ module.exports = {
     fallback: [path.join(__dirname, '../node_modules')],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      'src': path.resolve(__dirname, '../src'),
-      'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
+      'src': path.resolve(__dirname, '../client'),
+      'assets': path.resolve(__dirname, '../client/assets'),
+      'components': path.resolve(__dirname, '../client/components')
     }
   },
   resolveLoader: {
     fallback: [path.join(__dirname, '../node_modules')]
   },
   module: {
-    preLoaders: [
-      {
+    preLoaders: [{
         test: /\.vue$/,
         loader: 'eslint',
         include: [
@@ -51,8 +50,7 @@ module.exports = {
         exclude: /node_modules/
       }
     ],
-    loaders: [
-      {
+    loaders: [{
         test: /\.vue$/,
         loader: 'vue'
       },
@@ -60,7 +58,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         include: [
-          path.join(projectRoot, 'src')
+          path.join(projectRoot, 'client')
         ],
         exclude: /node_modules/
       },
@@ -90,7 +88,9 @@ module.exports = {
     formatter: require('eslint-friendly-formatter')
   },
   vue: {
-    loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
+    loaders: utils.cssLoaders({
+      sourceMap: useCssSourceMap
+    }),
     postcss: [
       require('autoprefixer')({
         browsers: ['last 2 versions']
