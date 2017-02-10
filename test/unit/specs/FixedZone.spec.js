@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import FixedZone from 'src/components/FixedZone';
+import assert from 'assert';
 
 describe('FixedZone.vue', () => {
   it('should render correct contents', () => {
@@ -7,7 +8,7 @@ describe('FixedZone.vue', () => {
       el: document.createElement('div'),
       render: (h) => h(FixedZone),
     });
-    expect(vm.$el.querySelector('.fixed-zone a:first-child').textContent)
-      .to.equal('问题反馈');
+    const actTxt = vm.$el.querySelector('.fixed-zone a:first-child').textContent;
+    assert.equal(actTxt, '问题反馈');
   });
 });
