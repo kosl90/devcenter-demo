@@ -79,7 +79,6 @@ export default {
   padding: 10px 0;
   margin: 0 0 10px;
   background-color: #fff;
-  border: 1px solid #e6e6e6;
 }
 
 .login-form {
@@ -88,6 +87,8 @@ export default {
 
 .login-box {
   margin: 0 0 20px;
+  padding: 0 0 20px;
+  border: 1px solid #e6e6e6;
   .title {
     margin: 22px auto 8px;
     text-align: center;
