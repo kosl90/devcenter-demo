@@ -1,22 +1,26 @@
-client for frontend or UI layer
+client/ frontend or UI layer
   `components
   `asserts
 
-config for project config
+config/ project config
   `env
   `db
 
-server for backend
+server/ backend
   `service
   `mailer
   `helper
 
-static for asserts like images?
+static/ public asserts like images
 
-test for test
+test/ for test
   `unit
   `e2e
 
-vendor for third party library
+vendor/ third party library
 
-docs for documentations
+docs/ documentations
+
+scripts/ optional scripts used for development, deploy, maintenance, initialization.
+
+build/ scripts and configurations for building application.

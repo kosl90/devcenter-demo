@@ -5,7 +5,8 @@
   "author": "kosl90 <kos1990l@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "node server/dev-server.js",
+    "dev": "node server/main.js",
+    "start": "cross-env NODE_ENV=production node server/main.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
