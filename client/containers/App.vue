@@ -11,7 +11,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img class="logo" alt="Brand" src="./assets/logo.png"></a>
+            <a class="navbar-brand" href="#"><img class="logo" alt="Brand" src="../assets/logo.png"></a>
           </div>
           <div class="collapse navbar-collapse" id="navbar-example">
             <ul class="nav navbar-nav navbar-right">
@@ -64,10 +64,9 @@
 </template>
 
 <script>
-import News from './components/News';
-import FixedZone from './components/FixedZone';
-import WebFooter from './components/WebFooter';
-import LoginBox from './components/LoginBox';
+import News from '~components/News';
+import FixedZone from '~components/FixedZone';
+import WebFooter from '~components/WebFooter';
 
 export default {
   name: 'app',
@@ -75,7 +74,6 @@ export default {
     News,
     FixedZone,
     WebFooter,
-    LoginBox,
   },
   data() {
     return {

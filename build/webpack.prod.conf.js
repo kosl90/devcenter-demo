@@ -50,9 +50,10 @@ var webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
+      chunks: ['app', 'vendor', 'manifest'],
       filename: process.env.NODE_ENV === 'testing' ?
         'index.html' : config.build.index,
-      template: 'index.html',
+      template: './client/views/index.html',
       inject: true,
       minify: {
         removeComments: true,
@@ -63,6 +64,18 @@ var webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['login', 'vendor', 'manifest'],
+      filename: 'login.html',
+      template: './client/views/login.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+      },
+      chunksSortMode: 'dependency',
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({

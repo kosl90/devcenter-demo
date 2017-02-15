@@ -12,7 +12,8 @@ var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 module.exports = {
   entry: {
-    app: './client/main.js'
+    app: './client/main.js',
+    login: './client/login.js',
   },
   output: {
     path: config.build.assetsRoot,
@@ -24,9 +25,10 @@ module.exports = {
     fallback: [path.join(__dirname, '../node_modules')],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      'src': path.resolve(__dirname, '../client'),
-      'assets': path.resolve(__dirname, '../client/assets'),
-      'components': path.resolve(__dirname, '../client/components')
+      '~src': path.resolve(__dirname, '../client'),
+      '~assets': path.resolve(__dirname, '../client/assets'),
+      '~components': path.resolve(__dirname, '../client/components'),
+      '~containers': path.resolve(__dirname, '../client/containers'),
     }
   },
   resolveLoader: {
@@ -34,58 +36,60 @@ module.exports = {
   },
   module: {
     preLoaders: [{
-        test: /\.vue$/,
-        loader: 'eslint',
-        include: [
-          path.join(projectRoot, 'src')
-        ],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        loader: 'eslint',
-        include: [
-          path.join(projectRoot, 'src')
-        ],
-        exclude: /node_modules/
-      }
+      test: /\.vue$/,
+      loader: 'eslint',
+      include: [
+        path.join(projectRoot, 'client')
+      ],
+      exclude: /node_modules/
+    },
+    {
+      test: /\.js$/,
+      loader: 'eslint',
+      include: [
+        path.join(projectRoot, 'client'),
+        path.join(projectRoot, 'server')
+      ],
+      exclude: /node_modules/
+    }
     ],
     loaders: [{
-        test: /\.vue$/,
-        loader: 'vue'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel',
-        include: [
-          path.join(projectRoot, 'client')
-        ],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-        }
+      test: /\.vue$/,
+      loader: 'vue'
+    },
+    {
+      test: /\.js$/,
+      loader: 'babel',
+      include: [
+        path.join(projectRoot, 'client')
+      ],
+      exclude: /node_modules/
+    },
+    {
+      test: /\.json$/,
+      loader: 'json'
+    },
+    {
+      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      loader: 'url',
+      query: {
+        limit: 10000,
+        name: utils.assetsPath('img/[name].[hash:7].[ext]')
       }
+    },
+    {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      loader: 'url',
+      query: {
+        limit: 10000,
+        name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+      }
+    }
     ]
   },
   eslint: {
-    formatter: require('eslint-friendly-formatter')
+    formatter: require('eslint-friendly-formatter'),
+    failOnError: true,
   },
   vue: {
     loaders: utils.cssLoaders({

@@ -21,6 +21,8 @@
 </template>
 
 <script>
+// TODO: import bootstrap
+
 export default {
   name: 'LoginBox',
   mounted() {
@@ -66,7 +68,7 @@ export default {
   },
   methods: {
     onSubmit(e) {
-      // FIXME: this submit event won't stop.
+      // FIXME: can this submit event be stopped.
       this.$emit('submit', e);
     },
   },
@@ -77,7 +79,7 @@ export default {
 .login-box-wrapper {
   max-width: 350px;
   padding: 10px 0;
-  margin: 0 0 10px;
+  margin: 0 auto 10px;
   background-color: #fff;
 }
 

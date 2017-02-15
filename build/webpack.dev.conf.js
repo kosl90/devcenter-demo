@@ -33,14 +33,17 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.NoErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
+      chunks: ['app'],
       filename: 'index.html',
-      template: 'index.html',
+      template: './client/views/index.html',
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['login'],
+      filename: 'login.html',
+      template: './client/views/login.html',
       inject: true
     }),
     new FriendlyErrors(),
-    // new webpack.SourceMapDevToolPlugin({
-    //   filename: '[file].[hash].map',
-    //   columns: false,
-    // })
   ]
 })
