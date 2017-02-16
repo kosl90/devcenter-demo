@@ -19,7 +19,7 @@ setupServer(app, port);
 
 // TODO: extract routers.
 app.post('/loginService', (rep, res) => {
-  logger.warn(JSON.stringify(rep.body));
+  logger.info(JSON.stringify(rep.body));
   res.sendStatus(200);
 });
 
