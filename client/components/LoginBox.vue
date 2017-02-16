@@ -36,12 +36,6 @@ export default {
       required: true,
     },
     useLDAP: Boolean,
-    maskColor: {
-      type: String,
-      default() {
-        return 'rgba(0,0,0,0.8)';
-      },
-    },
   },
   data() {
     return {
@@ -51,11 +45,6 @@ export default {
     };
   },
   computed: {
-    maskBg() {
-      return {
-        backgroundColor: this.maskColor,
-      };
-    },
     isUseLDAP() {
       return this.useLDAPModel;
     },

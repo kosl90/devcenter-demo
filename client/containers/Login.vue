@@ -10,6 +10,6 @@ export default {
 </script>
 
 <template>
-  <login-box actionURL="/loginService"></login-box>
+  <login-box ref="model" actionURL="/loginService"></login-box>
 </template>
 

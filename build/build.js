@@ -34,3 +34,5 @@ webpack(webpackConfig, function (err, stats) {
     chunkModules: false
   }) + '\n')
 })
+
+// TODO: compile server side.
