@@ -25,6 +25,7 @@ app.post('/loginService', (rep, res) => {
 
 
 // TODO: server side render
+// eslint-disable-next-line
 function createRenderer(bundle) {
   /* eslint-disable global-require */
   return require('vue-server-renderer').createBundleRenderer(bundle, {
