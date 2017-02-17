@@ -53,7 +53,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       chunks: ['app', 'vendor', 'manifest'],
       filename: process.env.NODE_ENV === 'testing' ?
         'index.html' : config.build.index,
-      template: './client/views/index.html',
+      template: './views/index.html',
       inject: true,
       minify: {
         removeComments: true,
@@ -68,7 +68,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       chunks: ['login', 'vendor', 'manifest'],
       filename: 'login.html',
-      template: './client/views/login.html',
+      template: './views/login.html',
       inject: true,
       minify: {
         removeComments: true,
