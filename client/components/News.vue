@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import '~style/News.scss';
+
 export default {
   name: 'News',
   props: {
@@ -22,40 +24,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.title {
-  line-height: 24px;
-  overflow: hidden;
-  zoom: 1;
-  padding-bottom: 20px;
-  border-bottom: 1px solid gray;
-
-  .name {
-    float: left;
-    margin: 0;
-  }
-
-  .more {
-    float: right;
-  }
-}
-
-ul, li {
-  padding: 0;
-}
-
-.item {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  padding: 0 80px 0 15px;
-
-  // position: relative;
-  // a {
-  //   position: absolute;
-  //   top: 0;
-  //   right: 0;
-  // }
-}
-</style>

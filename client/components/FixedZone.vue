@@ -6,17 +6,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'FixedZone',
-  };
-</script>
+import '~style/FixedZone.scss';
 
-<style lang="scss" scoped>
-.fixed-zone {
-  position: fixed;
-  bottom: 10px;
-  right: 22.5px;
-  width: 58px;
-  z-index: 999;
-}
-</style>
+export default {
+  name: 'FixedZone',
+};
+</script>

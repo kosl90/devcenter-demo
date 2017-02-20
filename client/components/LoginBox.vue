@@ -22,6 +22,7 @@
 
 <script>
 // TODO: import bootstrap
+import '~style/LoginBox.scss';
 
 export default {
   name: 'LoginBox',
@@ -63,34 +64,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.login-box-wrapper {
-  max-width: 350px;
-  padding: 10px 0;
-  margin: 0 auto 10px;
-  background-color: #fff;
-}
-
-.login-form {
-  padding: 20px 40px 0;
-}
-
-.login-box {
-  margin: 0 0 20px;
-  padding: 0 0 20px;
-  border: 1px solid #e6e6e6;
-  .title {
-    margin: 22px auto 8px;
-    text-align: center;
-    height: 51px;
-    width: 175px;
-  }
-}
-
-.switch-block {
-  text-align: center;
-  border: 1px solid #e6e6e6;
-  padding: 15px;
-}
-</style>

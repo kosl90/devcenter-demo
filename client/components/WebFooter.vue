@@ -13,20 +13,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'Footer',
-  };
+import '~style/WebFooter.scss';
+
+export default {
+  name: 'Footer',
+};
 </script>
 
-<style lang="scss" scoped>
-  .footer {
-    flex: 0;
-    padding: 18px 0;
-    font-size: 12px;
-    background-color: #d3d3d3;
-
-    p {
-      margin: 0;
-    }
-  }
-</style>
