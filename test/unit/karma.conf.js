@@ -52,9 +52,11 @@ module.exports = function (config) {
     preprocessors: {
       './index.js': ['webpack', 'sourcemap']
     },
+    // https://github.com/webpack-contrib/karma-webpack
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true,
+      stats: 'errors-only',
     },
     coverageReporter: {
       dir: './coverage',

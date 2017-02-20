@@ -10,6 +10,7 @@ const compiler = webpack(webpackConfig);
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   quiet: true,
+  // serverSideRender: true,
 });
 
 const hotMiddleware = require('webpack-hot-middleware')(compiler, {
