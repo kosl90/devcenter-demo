@@ -4,10 +4,10 @@
 
 # TODO for new arch
 
-[ ] config details
-[ ] controller?
-[ ] test
-[ ] webpack config
+- [ ] config details
+- [ ] controller?
+- [ ] test
+- [ ] webpack config
 
 
 ## Build Setup
