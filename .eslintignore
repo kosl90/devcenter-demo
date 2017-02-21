@@ -1,4 +1,4 @@
 build/*.js
 config/*.js
-server/dev-server.js
 test/**/karma.conf.js
+postcss.config.js
