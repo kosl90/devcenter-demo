@@ -2,8 +2,8 @@
 const webpack = require('webpack');
 const historyAPIFallback = require('connect-history-api-fallback');
 const webpackConfig = process.env.NODE_ENV === 'testing' ?
-  require('../../build/webpack.prod.conf') :
-  require('../../build/webpack.dev.conf');
+  require('../../../build/webpack.prod.conf') :
+  require('../../../build/webpack.dev.conf');
 
 const compiler = webpack(webpackConfig);
 

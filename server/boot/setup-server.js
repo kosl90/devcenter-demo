@@ -2,9 +2,9 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const setupProxy = require('./proxy');
-const setupSession = require('./session');
-const setupDevServer = require('./dev-server');
+const setupProxy = require('./middleware/proxy');
+const setupSession = require('./middleware/session');
+const setupDevServer = require('./dev/dev-server');
 const logger = require('../logger');
 const config = require('../../config');
 

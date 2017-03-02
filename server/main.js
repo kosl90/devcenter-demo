@@ -15,6 +15,9 @@ const isProd = process.env.NODE_ENV === 'production';
 
 
 const app = express();
+// TODO:
+// - using node API of webpack to re-compilation server codes.
+// - using node API of nodemon to restart server when compilation is done?
 setupServer(app, port);
 
 // TODO: extract routers.
