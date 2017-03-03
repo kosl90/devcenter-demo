@@ -6,9 +6,13 @@
 </template>
 
 <script>
-import '~style/FixedZone.scss';
+  import '~style/FixedZone.scss';
 
-export default {
-  name: 'FixedZone',
-};
+  export default {
+    name: 'FixedZone',
+    serverCacheKey() {
+      return `vee-${this.name}`;
+    },
+  };
+
 </script>
