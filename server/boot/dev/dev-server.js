@@ -1,48 +1,33 @@
-/* eslint-disable import/no-extraneous-dependencies */
-const webpack = require('webpack');
-const historyAPIFallback = require('connect-history-api-fallback');
-const webpackConfig = process.env.NODE_ENV === 'testing' ?
-  require('../../../build/webpack.prod.conf') :
-  require('../../../build/webpack.dev.conf');
+/* eslint-disable */
+const chalk = require('chalk');
+const path = require('path');
+const nodemon = require('nodemon');
+const serverCompiler = require('./webpack.server');
 
-const compiler = webpack(webpackConfig);
+let first = true;
+const mainScript = './server/main.js';
 
-const devMiddleware = require('webpack-dev-middleware')(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  quiet: true,
-  // serverSideRender: true,
+// TODO: tune parameters
+nodemon({
+  script: mainScript,
+  watch: [path.resolve('./server')],
+  ignore: ['dev-server.js'],
+})
+  .on('start', () => {
+    console.log(chalk.green(`[server] starting \`${mainScript}\``));
+  })
+  .on('restart', () => {
+    console.log(chalk.green('[server] restarting due to changes...'));
+  })
+  .on('crash', () => {
+    console.log(chalk.red('[server] crashed'));
+  })
+
+serverCompiler.watch({}, (err, stats) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  nodemon.emit(first ? 'start' : 'restart');
 });
-
-const hotMiddleware = require('webpack-hot-middleware')(compiler, {
-  log: () => { },
-});
-
-// force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', (compilation) => {
-  compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
-    hotMiddleware.publish({
-      action: 'reload',
-    });
-    cb();
-  });
-});
-
-
-module.exports = (app, port) => {
-  // handle fallback for HTML5 history API
-  app.use(historyAPIFallback());
-
-  // serve webpack bundle output
-  app.use(devMiddleware);
-
-  // enable hot-reload and state-preserving
-  // compilation error display
-  app.use(hotMiddleware);
-
-  const uri = `http://localhost:${port}`;
-
-  devMiddleware.waitUntilValid(() => {
-    // eslint-disable-next-line
-    console.log(`> Listening at ${uri}\n`);
-  });
-};

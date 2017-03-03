@@ -4,13 +4,12 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const setupProxy = require('./middleware/proxy');
 const setupSession = require('./middleware/session');
-const setupDevServer = require('./dev/dev-server');
 const logger = require('../logger');
 const config = require('../../config');
 
 const isProd = process.env.NODE_ENV === 'production';
 
-module.exports = (app, port) => {
+module.exports = (app) => {
   app.use(bodyParser.urlencoded({
     extended: true,
   }));
@@ -31,6 +30,6 @@ module.exports = (app, port) => {
   }
 
   if (!isProd) {
-    setupDevServer(app, port);
+    require('./dev/webpack.client')(app);  // eslint-disable-line
   }
 };

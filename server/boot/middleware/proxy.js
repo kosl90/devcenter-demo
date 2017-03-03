@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const proxyMiddleware = require('http-proxy-middleware');
-const config = require('../../config');
+const config = require('../../../config');
 
 module.exports = (app) => {
   // Define HTTP proxies to your custom API backend

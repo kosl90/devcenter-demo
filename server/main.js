@@ -1,34 +1,25 @@
 require('../build/check-versions')();
-const config = require('../config');
 const express = require('express');
+const path = require('path');
+const config = require('../config');
 const setupServer = require('./boot/setup-server');
-
 const logger = require('./logger');
 
 
 if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
 
 // default port where dev server listens for incoming traffic
-const port = process.env.PORT || config.dev.port || 8080;
-const host = process.env.HOST || config.dev.host || 'localhost';
-const isProd = process.env.NODE_ENV === 'production';
-
+const port = process.env.PORT || config.server.port || 8080;
+const hostname = process.env.HOST || config.server.hostname || 'localhost';
+const serverType = config.server.type;
 
 const app = express();
-// TODO:
-// - using node API of webpack to re-compilation server codes.
-// - using node API of nodemon to restart server when compilation is done?
-setupServer(app, port);
+app.locals.port = port;
+app.locals.hostname = hostname;
+app.locals.scheme = serverType === 'http' ? 'http' : 'https';
 
-// TODO: extract routers.
-app.post('/loginService', (rep, res) => {
-  logger.info(JSON.stringify(rep.body));
-  res.sendStatus(200);
-});
+setupServer(app);
 
-
-// TODO: server side render
-// eslint-disable-next-line
 function createRenderer(bundle) {
   /* eslint-disable global-require */
   return require('vue-server-renderer').createBundleRenderer(bundle, {
@@ -39,14 +30,20 @@ function createRenderer(bundle) {
   });
 }
 
+// TODO: ssr
+const bundlePath = path.resolve(__dirname, '../dist/server.bundle.js');
+const render = createRenderer(bundlePath);  // eslint-disable-line
+
+// TODO: extract routers.
+app.post('/loginService', (rep, res) => {
+  logger.info(JSON.stringify(rep.body));
+  res.sendStatus(200);
+});
+
 
 app.listen(port, (err) => {
   if (err) {
     logger.error(err);
     return;
-  }
-
-  if (isProd) {
-    logger.info(`listening at ${host}:${port}`);
   }
 });

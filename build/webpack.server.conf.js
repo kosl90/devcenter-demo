@@ -4,11 +4,11 @@ var projectRoot = path.resolve(__dirname, '../');
 
 module.exports = {
   entry: {
-    server: './server/main.js',
+    server: './server/server-entry.js',
   },
   output: {
     path: config.build.assetsPath,
-    filename: 'server.js',
+    filename: path.resolve(config.build.assetsRoot, 'server.bundle.js'),
   },
   resolve: {
     alias: {
