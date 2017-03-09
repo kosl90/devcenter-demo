@@ -1,11 +1,10 @@
-const path = require('path');
 const Vue = require('vue');
 
-const App = require(path.resolve(__dirname, '../client/App.vue'));  // eslint-disable-line import/no-dynamic-require
+const App = require('~containers/App.vue');  // eslint-disable-line import/no-dynamic-require
 
 const app = new Vue(App);
 
 // TODO:
-exports = (context) => {
+module.exports = (context) => { // eslint-disable-line no-unused-vars, arrow-body-style
   return app;
 };

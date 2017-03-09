@@ -11,7 +11,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img class="logo" alt="Brand" src="../assets/logo.png"></a>
+            <a class="navbar-brand" href="#"><img class="logo" alt="Brand" :src="logo"></a>
           </div>
           <div class="collapse navbar-collapse" id="navbar-example">
             <ul class="nav navbar-nav navbar-right">
@@ -67,6 +67,7 @@
 import News from '~components/News';
 import FixedZone from '~components/FixedZone';
 import WebFooter from '~components/WebFooter';
+import logo from '../assets/logo.png';
 
 export default {
   name: 'app',
@@ -77,6 +78,7 @@ export default {
   },
   data() {
     return {
+      logo,
       prodNews: [
                 { link: 'https://baidu.com', title: '百度' },
                 { link: 'https://baidu.com', title: '百度' },
