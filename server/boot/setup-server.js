@@ -30,6 +30,11 @@ module.exports = (app) => {
     app.use(express.static('./dist'));
   }
 
+  // TODO: extract routers.
+  app.post('/loginService', (rep, res) => {
+    logger.info(JSON.stringify(rep.body));
+    res.sendStatus(200);
+  });
 
   function createRenderer(bundle) {
     /* eslint-disable global-require */
@@ -41,25 +46,20 @@ module.exports = (app) => {
     });
   }
 
-  const bundle = fs.readFileSync(path.resolve(__dirname, '../../dist/server.bundle.js'), 'utf8');
+  const bundle = path.resolve(__dirname, '../../vue-ssr-bundle.json');
   const render = createRenderer(bundle);  // eslint-disable-line
-
-  // TODO: extract routers.
-  app.post('/loginService', (rep, res) => {
-    logger.info(JSON.stringify(rep.body));
-    res.sendStatus(200);
-  });
 
   app.get('/test', (req, res, next) => {
     logger.info('render from server');
 
     render.renderToString(req, (err, html) => {
       if (err) {
-        logger.error(`Render Error: ${err}`);
+        logger.error(`Render Error: ${err}\n${err.stack}`);
         next(err);
         return;
       }
 
+      logger.info(html);
       res.send(html);
     });
   });
