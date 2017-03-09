@@ -11,7 +11,7 @@ module.exports = (app) => {
   const devMiddleware = webpackDevMiddleware(clientCompiler, {
     publicPath: webpackConfig.output.publicPath,
     quiet: true,
-    // serverSideRender: true,
+    serverSideRender: true,
   });
 
   const hotMiddleware = webpackHotMiddleware(clientCompiler, {

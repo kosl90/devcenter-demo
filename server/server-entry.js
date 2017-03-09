@@ -6,5 +6,5 @@ const app = new Vue(App);
 
 // TODO:
 module.exports = (context) => { // eslint-disable-line no-unused-vars, arrow-body-style
-  return app;
+  return Promise.resolve(app);
 };

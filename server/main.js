@@ -1,6 +1,6 @@
 require('../build/check-versions')();
 const express = require('express');
-const path = require('path');
+// const path = require('path');
 const config = require('../config');
 const setupServer = require('./boot/setup-server');
 const logger = require('./logger');
@@ -19,27 +19,6 @@ app.locals.hostname = hostname;
 app.locals.scheme = serverType === 'http' ? 'http' : 'https';
 
 setupServer(app);
-
-function createRenderer(bundle) {
-  /* eslint-disable global-require */
-  return require('vue-server-renderer').createBundleRenderer(bundle, {
-    cache: require('lru-cache')({
-      max: 1000,
-      maxAge: 1000 * 60 * 15,
-    }),
-  });
-}
-
-// TODO: ssr
-const bundlePath = path.resolve(__dirname, '../dist/server.bundle.js');
-const render = createRenderer(bundlePath);  // eslint-disable-line
-
-// TODO: extract routers.
-app.post('/loginService', (rep, res) => {
-  logger.info(JSON.stringify(rep.body));
-  res.sendStatus(200);
-});
-
 
 app.listen(port, (err) => {
   if (err) {

@@ -6,6 +6,7 @@ const setupProxy = require('./middleware/proxy');
 const setupSession = require('./middleware/session');
 const logger = require('../logger');
 const config = require('../../config');
+const fs = require('fs');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -28,6 +29,45 @@ module.exports = (app) => {
   if (isProd) {
     app.use(express.static('./dist'));
   }
+
+
+  function createRenderer(bundle) {
+    /* eslint-disable global-require */
+    return require('vue-server-renderer').createBundleRenderer(bundle, {
+      cache: require('lru-cache')({
+        max: 1000,
+        maxAge: 1000 * 60 * 15,
+      }),
+    });
+  }
+
+  const bundle = fs.readFileSync(path.resolve(__dirname, '../../dist/server.bundle.js'), 'utf8');
+  const render = createRenderer(bundle);  // eslint-disable-line
+
+  // TODO: extract routers.
+  app.post('/loginService', (rep, res) => {
+    logger.info(JSON.stringify(rep.body));
+    res.sendStatus(200);
+  });
+
+  app.get('/test', (req, res, next) => {
+    logger.info('render from server');
+
+    render.renderToString(req, (err, html) => {
+      if (err) {
+        logger.error(`Render Error: ${err}`);
+        next(err);
+        return;
+      }
+
+      res.send(html);
+    });
+  });
+
+  app.use((err, req, res, next) => { // eslint-disable-line
+    res.sendStatus(500);
+  });
+
 
   if (!isProd) {
     require('./dev/webpack.client')(app);  // eslint-disable-line

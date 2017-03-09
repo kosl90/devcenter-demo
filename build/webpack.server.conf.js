@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
-var FriendlyErrors = require('friendly-errors-webpack-plugin')
+var FriendlyErrors = require('friendly-errors-webpack-plugin');
+var VueSSRPlugin = require('vue-ssr-webpack-plugin');
 var config = require('../config');
 var utils = require('./utils')
 
@@ -73,7 +74,8 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': config.dev.env,
+      // 'process.env': config.dev.env,
+      'process.env.NODE_ENV': process.env.NODE_ENV || 'development',
       'process.env.VUE_ENV': '"server"',
     }),
     new webpack.ProvidePlugin({
@@ -81,6 +83,9 @@ module.exports = {
       'jQuery': 'jquery',
     }),
     new webpack.NoErrorsPlugin(),
+    new VueSSRPlugin({
+      entry: 'server',
+    }),
     new FriendlyErrors(),
   ],
     eslint: {
