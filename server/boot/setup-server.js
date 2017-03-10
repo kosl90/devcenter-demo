@@ -46,15 +46,16 @@ module.exports = (app) => {
     });
   }
 
+  // FIXME: windows not defined
   const bundle = path.resolve(__dirname, '../../vue-ssr-bundle.json');
-  const render = createRenderer(bundle);  // eslint-disable-line
+  const render = createRenderer(bundle);
 
   app.get('/test', (req, res, next) => {
     logger.info('render from server');
 
     render.renderToString(req, (err, html) => {
       if (err) {
-        logger.error(`Render Error: ${err}\n${err.stack}`);
+        logger.error(`Render failed: ${err}\n${err.stack}`);
         next(err);
         return;
       }
