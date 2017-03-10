@@ -25,7 +25,7 @@ nodemon({
 
 serverCompiler.watch({}, (err, stats) => {
   if (err) {
-    console.error(err);
+    console.error('Compile error: ', err);
     return;
   }
 
