@@ -19,6 +19,9 @@ module.exports = {
     filename: path.resolve(config.build.assetsRoot, 'server.bundle.js'),
     libraryTarget: 'commonjs2',
   },
+  resolveLoader: {
+    fallback: [path.join(__dirname, '../node_modules')]
+  },
   module: {
     noParse: /es6-promise\.js$/,
     preLoaders: [
