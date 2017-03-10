@@ -23,11 +23,15 @@ nodemon({
     console.log(chalk.red('[server] crashed'));
   })
 
-serverCompiler.watch({}, (err, stats) => {
+serverCompiler.watch({}, (err, _stats) => {
   if (err) {
     console.error('Compile error: ', err);
     return;
   }
+
+  const stats = _stats.toJson();
+  stats.warnings.forEach(warn => console.warn(warn));
+  stats.errors.forEach(err => console.error(err));
 
   nodemon.emit(first ? 'start' : 'restart');
 });
