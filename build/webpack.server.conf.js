@@ -19,35 +19,42 @@ module.exports = {
     filename: path.resolve(config.build.assetsRoot, 'server.bundle.js'),
     libraryTarget: 'commonjs2',
   },
-  resolveLoader: {
-    fallback: [path.join(__dirname, '../node_modules')]
-  },
+  // resolveLoader: {
+  //   fallback: [path.join(__dirname, '../node_modules')]
+  // },
   module: {
     noParse: /es6-promise\.js$/,
-    preLoaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'eslint',
-        exclude: /node_modules/
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+        enforce: 'pre',
+        options: {
+          formatter: require('eslint-friendly-formatter'),
+          failOnError: true,
+        },
       },
-    ],
-    loaders: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader',
+        options: {
+          loaders: utils.cssLoaders(),
+          postcss: [
+            require('autoprefixer')({
+              browsers: ['last 2 versions']
+            })
+          ]
+        }
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
@@ -55,7 +62,7 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
@@ -64,8 +71,8 @@ module.exports = {
     ].concat(utils.styleLoaders()),
   },
   resolve: {
-    extensions: ['', '.js', '.vue'],
-    fallback: [path.join(__dirname, '../node_modules')],
+    extensions: ['.js', '.vue'],
+    modules: [path.join(__dirname, '../node_modules')],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       '~src': path.resolve(__dirname, '../client'),
@@ -85,23 +92,10 @@ module.exports = {
       '$': 'jquery',
       'jQuery': 'jquery',
     }),
-    new webpack.NoErrorsPlugin(),
     new VueSSRPlugin({
       entry: 'server',
     }),
     new FriendlyErrors(),
   ],
-  eslint: {
-    formatter: require('eslint-friendly-formatter'),
-    failOnError: true,
-  },
-  vue: {
-    loaders: utils.cssLoaders(),
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 versions']
-      })
-    ]
-  },
   externals: Object.keys(require('../package.json').dependencies),
 };

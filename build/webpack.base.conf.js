@@ -21,8 +21,8 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue', '.json'],
-    fallback: [path.join(__dirname, '../node_modules')],
+    extensions: ['.js', '.vue', '.json'],
+    // modules: [path.join(__dirname, '../node_modules')],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       '~src': path.resolve(__dirname, '../client'),
@@ -33,31 +33,46 @@ module.exports = {
     }
   },
   resolveLoader: {
-    fallback: [path.join(__dirname, '../node_modules')]
+    // modules: [path.join(__dirname, '../node_modules')],
+    moduleExtensions: ['-loader'],
   },
   module: {
-    preLoaders: [
+    rules: [
+      // {
+      //   test: /\.vue$/,
+      //   loader: 'eslint',
+      //   enforce: 'pre',
+      //   include: [
+      //     path.join(projectRoot, 'client')
+      //   ],
+      //   exclude: /node_modules/,
+      //   options: {
+      //     formatter: require('eslint-friendly-formatter'),
+      //     failOnError: true,
+      //   },
+      // },
+      // {
+      //   test: /\.js$/,
+      //   loader: 'eslint',
+      //   enforce: 'pre',
+      //   include: [
+      //     path.join(projectRoot, 'client')
+      //   ],
+      //   exclude: /node_modules/
+      // },
       {
         test: /\.vue$/,
-        loader: 'eslint',
-        include: [
-          path.join(projectRoot, 'client')
-        ],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        loader: 'eslint',
-        include: [
-          path.join(projectRoot, 'client')
-        ],
-        exclude: /node_modules/
-      }
-    ],
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue',
+        options: {
+          loaders: utils.cssLoaders({
+            sourceMap: useCssSourceMap
+          }),
+          postcss: [
+            require('autoprefixer')({
+              browsers: ['last 2 versions']
+            })
+          ]
+        }
       },
       {
         test: /\.js$/,
@@ -74,7 +89,7 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url',
-        query: {
+        options: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
@@ -82,25 +97,11 @@ module.exports = {
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url',
-        query: {
+        options: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
     ]
   },
-  eslint: {
-    formatter: require('eslint-friendly-formatter'),
-    failOnError: true,
-  },
-  vue: {
-    loaders: utils.cssLoaders({
-      sourceMap: useCssSourceMap
-    }),
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 versions']
-      })
-    ]
-  }
 }

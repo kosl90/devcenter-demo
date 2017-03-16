@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Login from './containers/Login';
+import Login from './containers/Login.vue';
 
 /* eslint-disable no-new */
 new Vue({
