@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var merge = require('webpack-merge');
 var VueSSRPlugin = require('vue-ssr-webpack-plugin');
 var baseConfig = require('./webpack.base.conf');
+var config = require('../config');
 
 var webpackConfig = merge(baseConfig, {
   target: 'node',
