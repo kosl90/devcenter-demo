@@ -11,6 +11,7 @@ module.exports = (app) => {
     webpackConfig.entry[name] = ['./build/dev-client'].concat(webpackConfig.entry[name])
   })
 
+  webpackConfig.output.filename = '[name].js'
   webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
 
   const clientCompiler = webpack(webpackConfig);
