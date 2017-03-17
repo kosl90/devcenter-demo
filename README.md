@@ -2,13 +2,6 @@
 
 > A devcenter demo project.
 
-# TODO for new arch
-
-- [ ] config details
-- [ ] controller?
-- [ ] test
-- [ ] webpack config
-
 
 ## Build Setup
 
@@ -33,3 +26,8 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+# TODO for new arch
+
+[TODO.md](docs/TODO.md)
