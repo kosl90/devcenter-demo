@@ -38,28 +38,28 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.vue$/,
-      //   loader: 'eslint',
-      //   enforce: 'pre',
-      //   include: [
-      //     path.join(projectRoot, 'client')
-      //   ],
-      //   exclude: /node_modules/,
-      //   options: {
-      //     formatter: require('eslint-friendly-formatter'),
-      //     failOnError: true,
-      //   },
-      // },
-      // {
-      //   test: /\.js$/,
-      //   loader: 'eslint',
-      //   enforce: 'pre',
-      //   include: [
-      //     path.join(projectRoot, 'client')
-      //   ],
-      //   exclude: /node_modules/
-      // },
+      {
+        test: /\.vue$/,
+        loader: 'eslint',
+        enforce: 'pre',
+        include: [
+          path.join(projectRoot, 'client')
+        ],
+        exclude: /node_modules/,
+        options: {
+          formatter: require('eslint-friendly-formatter'),
+          failOnError: true,
+        },
+      },
+      {
+        test: /\.js$/,
+        loader: 'eslint',
+        enforce: 'pre',
+        include: [
+          path.join(projectRoot, 'client')
+        ],
+        exclude: /node_modules/
+      },
       {
         test: /\.vue$/,
         loader: 'vue',
