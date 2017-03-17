@@ -1,6 +1,7 @@
 var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
+var vueLoaderConfig = require('./vue-loader.config');
 var projectRoot = path.resolve(__dirname, '../')
 
 var env = process.env.NODE_ENV
@@ -33,7 +34,6 @@ module.exports = {
     }
   },
   resolveLoader: {
-    // modules: [path.join(__dirname, '../node_modules')],
     moduleExtensions: ['-loader'],
   },
   module: {
@@ -63,16 +63,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue',
-        options: {
-          loaders: utils.cssLoaders({
-            sourceMap: useCssSourceMap
-          }),
-          postcss: [
-            require('autoprefixer')({
-              browsers: ['last 2 versions']
-            })
-          ]
-        }
+        options: vueLoaderConfig
       },
       {
         test: /\.js$/,
