@@ -1,6 +1,6 @@
 const Vue = require('vue');
 
-const App = require('~containers/App.vue');  // eslint-disable-line import/no-dynamic-require
+const App = require('~containers/App');
 
 const app = new Vue(App);
 

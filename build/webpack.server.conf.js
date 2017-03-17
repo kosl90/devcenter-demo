@@ -4,24 +4,23 @@ var FriendlyErrors = require('friendly-errors-webpack-plugin');
 var VueSSRPlugin = require('vue-ssr-webpack-plugin');
 var config = require('../config');
 var utils = require('./utils')
+var vueLoaderConfig = require('./vue-loader.config');
 
-var projectRoot = path.resolve(__dirname, '../');
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
+}
 
-
-module.exports = {
+var webpackConfig = {
   target: 'node',
   devtool: false,
   entry: {
     server: './server/server-entry.js',
   },
   output: {
-    path: config.build.assetsPath,
+    path: config.build.assetsRoot,
     filename: path.resolve(config.build.assetsRoot, 'server.bundle.js'),
     libraryTarget: 'commonjs2',
   },
-  // resolveLoader: {
-  //   fallback: [path.join(__dirname, '../node_modules')]
-  // },
   module: {
     noParse: /es6-promise\.js$/,
     rules: [
@@ -38,14 +37,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: {
-          loaders: utils.cssLoaders(),
-          postcss: [
-            require('autoprefixer')({
-              browsers: ['last 2 versions']
-            })
-          ]
-        }
+        options: vueLoaderConfig,
       },
       {
         test: /\.js$/,
@@ -72,19 +64,17 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.vue'],
-    modules: [path.join(__dirname, '../node_modules')],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      '~src': path.resolve(__dirname, '../client'),
-      '~assets': path.resolve(__dirname, '../client/assets'),
-      '~style': path.resolve(__dirname, '../client/style'),
-      '~components': path.resolve(__dirname, '../client/components'),
-      '~containers': path.resolve(__dirname, '../client/containers'),
+      '~src': resolve('client'),
+      '~assets': resolve('client/assets'),
+      '~style': resolve('client/style'),
+      '~components': resolve('client/components'),
+      '~containers': resolve('client/containers'),
     }
   },
   plugins: [
     new webpack.DefinePlugin({
-      //'process.env': config.dev.env,
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"',
     }),
@@ -92,6 +82,7 @@ module.exports = {
       '$': 'jquery',
       'jQuery': 'jquery',
     }),
+    new webpack.NoEmitOnErrorsPlugin(),
     new VueSSRPlugin({
       entry: 'server',
     }),
@@ -99,3 +90,5 @@ module.exports = {
   ],
   externals: Object.keys(require('../package.json').dependencies),
 };
+
+module.exports = webpackConfig;
