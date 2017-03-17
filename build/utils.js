@@ -69,3 +69,28 @@ exports.styleLoaders = function (options) {
   }
   return output
 }
+
+exports.htmlPluginConfig = function htmlPluginConfig(name, chunks) {
+  var filename = name + '.html';
+  var config = {
+    chunks: [name].concat(chunks || []),
+    filename: filename,
+    template: './views/' + filename,
+    inject: true,
+  }
+
+  var isProduction = process.env.NODE_ENV === 'production';
+  // https://github.com/kangax/html-minifier#options-quick-reference
+  if (isProduction) {
+    config.minify = {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+    };
+
+    // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+    config.chunksSortMode = 'dependency';
+  }
+
+  return config;
+}

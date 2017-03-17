@@ -6,6 +6,13 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('../../../build/webpack.client.conf');
 
 module.exports = (app) => {
+  // add hot-reload related code to entry chunks
+  Object.keys(webpackConfig.entry).forEach(function (name) {
+    webpackConfig.entry[name] = ['./build/dev-client'].concat(webpackConfig.entry[name])
+  })
+
+  webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
+
   const clientCompiler = webpack(webpackConfig);
 
   const devMiddleware = webpackDevMiddleware(clientCompiler, {

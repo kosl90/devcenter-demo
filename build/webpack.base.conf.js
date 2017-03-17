@@ -90,6 +90,8 @@ var webpackConfig = {
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
     }),
+    // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrors(),
   ],
