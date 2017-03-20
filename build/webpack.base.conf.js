@@ -97,6 +97,7 @@ var webpackConfig = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
+      '~config': path.resolve(__dirname, '../config'),
       '~src': path.resolve(__dirname, '../client'),
       '~assets': path.resolve(__dirname, '../client/assets'),
       '~style': path.resolve(__dirname, '../client/style'),
