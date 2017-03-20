@@ -2,8 +2,10 @@ var path = require('path')
 var config = require('../config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+var isProd = config.isProd
+
 exports.assetsPath = function (_path) {
-  var assetsSubDirectory = process.env.NODE_ENV === 'production'
+  var assetsSubDirectory = isProd
     ? config.build.assetsSubDirectory
     : config.dev.assetsSubDirectory
   return path.posix.join(assetsSubDirectory, _path)
@@ -15,7 +17,7 @@ exports.cssLoaders = function (options) {
   var cssLoader = {
     loader: 'css-loader',
     options: {
-      minimize: process.env.NODE_ENV === 'production',
+      minimize: isProd,
       sourceMap: options.sourceMap
     }
   }
@@ -70,27 +72,44 @@ exports.styleLoaders = function (options) {
   return output
 }
 
-exports.htmlPluginConfig = function htmlPluginConfig(name, chunks) {
-  var filename = name + '.html';
-  var config = {
-    chunks: [name].concat(chunks || []),
+/**
+ * htmlPluginConfig(entryname)
+ * htmlPluginConfig(entryName, name)
+ * htmlPluginConfig(entryName, chunks)
+ * htmlPluginConfig(entryName, name, chunks)
+ */
+exports.htmlPluginConfig = function htmlPluginConfig(entryName, name, chunks) {
+  var filename = entryName + '.html';
+
+  if (typeof name === 'string') {
+    filename = name;
+  } else {
+    // not string, means this is chunks.
+    chunks = name;
+  }
+
+  // chunks is optional too
+  chunks = chunks || [];
+
+  var option = {
+    chunks: [entryName].concat(chunks),
     filename: filename,
-    template: './views/' + filename,
+    template: path.join(config.viewDirectory, filename),
     inject: true,
   }
 
-  var isProduction = process.env.NODE_ENV === 'production';
   // https://github.com/kangax/html-minifier#options-quick-reference
-  if (isProduction) {
-    config.minify = {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-    };
-
-    // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-    config.chunksSortMode = 'dependency';
+  if (isProd) {
+    option = Object.assign(option, {
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency'
+    })
   }
 
-  return config;
+  return option;
 }

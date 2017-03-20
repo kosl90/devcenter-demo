@@ -7,7 +7,7 @@ var baseConfig = require('./webpack.base.conf');
 var utils = require('./utils')
 var config = require('../config')
 
-var isProduction = process.env.NODE_ENV === 'production';
+var isProduction = config.isProd;
 
 var webpackConfig = merge(baseConfig, {
   entry: {

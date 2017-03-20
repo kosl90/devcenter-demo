@@ -6,12 +6,18 @@ const clientRoot = path.resolve(__dirname, '../client');
 const serverRoot = path.resolve(__dirname, '../server');
 const staticRoot = path.resolve(__dirname, '../static');
 
+const env = process.env.NODE_ENV || 'development';
+
 // TODO: remove build and dev.
-module.exports = {
+const config = {
+  isProd: env === 'production',
+  isDev: env === 'development',
+  isTest: env === 'test',
   projectRoot,
   clientRoot,
   serverRoot,
   staticRoot,
+  viewDirectory: './views',
   sessionStore: require('./session'),
   server: Object.assign({
     type: 'http',  // http/https/http2
@@ -47,3 +53,8 @@ module.exports = {
     cssSourceMap: false
   }
 };
+
+// TODO: test, work?
+Object.freeze(config);
+
+module.exports = config;
