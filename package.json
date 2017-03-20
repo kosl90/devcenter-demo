@@ -5,8 +5,9 @@
   "author": "kosl90 <kos1990l@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "nodemon --watch build --watch server/boot/dev/dev-server.js server/boot/dev/dev-server.js",
-    "start": "cross-env NODE_ENV=production node server/main.js",
+    "dev": "cross-env NODE_ENV=development nodemon --watch build --watch server/boot/dev/dev-server.js server/boot/dev/dev-server.js",
+    "debug": "cross-env NODE_ENV=development node server/boot/dev/dev-server.js",
+    "server": "cross-env NODE_ENV=production node server/main.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
