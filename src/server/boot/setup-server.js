@@ -6,6 +6,8 @@ const proxy = require('./middleware/proxy');
 const session = require('./middleware/session');
 const logger = require('../logger');
 const config = require('../config');
+const loginServiceRouter = require('../router/loginService');
+const ssrTestRouter = require('../router/ssrTest');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -29,39 +31,8 @@ module.exports = (app) => {
     app.use(express.static('./dist'));
   }
 
-  // TODO: extract routers.
-  app.post('/loginService', (rep, res) => {
-    logger.info(JSON.stringify(rep.body));
-    res.sendStatus(200);
-  });
-
-  function createRenderer(bundle) {
-    /* eslint-disable global-require */
-    return require('vue-server-renderer').createBundleRenderer(bundle, {
-      cache: require('lru-cache')({
-        max: 1000,
-        maxAge: 1000 * 60 * 15,
-      }),
-    });
-  }
-
-  const bundle = path.resolve(config.projectRoot, 'vue-ssr-bundle.json');
-  const render = createRenderer(bundle);
-
-  app.get('/test', (req, res, next) => {
-    logger.info('render from server');
-
-    render.renderToString(req, (err, html) => {
-      if (err) {
-        logger.error(`Render failed: ${err}\n${err.stack}`);
-        next(err);
-        return;
-      }
-
-      logger.info(html);
-      res.send(html);
-    });
-  });
+  app.use('/loginService', loginServiceRouter);
+  app.use('/test', ssrTestRouter);
 
   app.use((err, req, res, next) => { // eslint-disable-line
     res.sendStatus(500);

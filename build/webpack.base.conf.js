@@ -114,5 +114,6 @@ webpackConfig.module.rules = webpackConfig.module.rules.concat(utils.styleLoader
     ? config.build.productionSourceMap
     : config.dev.cssSourceMap,
   extract: isProduction
-}))
+}));
+
 module.exports = webpackConfig;
