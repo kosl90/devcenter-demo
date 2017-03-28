@@ -2,11 +2,10 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const setupProxy = require('./middleware/proxy');
-const setupSession = require('./middleware/session');
+const proxy = require('./middleware/proxy');
+const session = require('./middleware/session');
 const logger = require('../logger');
-const config = require('../../config');
-const fs = require('fs');
+const config = require('../config');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -15,8 +14,8 @@ module.exports = (app) => {
     extended: true,
   }));
 
-  setupProxy(app);
-  setupSession(app);
+  app.use(...proxy);
+  app.use(session);
 
   // TODO: set in config file or accordingly?
   // http://stackoverflow.com/questions/27906551/node-js-logging-use-morgan-and-winston
@@ -46,8 +45,7 @@ module.exports = (app) => {
     });
   }
 
-  // FIXME: windows not defined
-  const bundle = path.resolve(__dirname, '../../vue-ssr-bundle.json');
+  const bundle = path.resolve(config.projectRoot, 'vue-ssr-bundle.json');
   const render = createRenderer(bundle);
 
   app.get('/test', (req, res, next) => {

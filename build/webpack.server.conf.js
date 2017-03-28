@@ -8,7 +8,7 @@ var webpackConfig = merge(baseConfig, {
   target: 'node',
   devtool: false,
   entry: {
-    server: './server/server-entry.js',
+    server: './src/server/server-entry.js',
   },
   output: {
     path: config.build.assetsRoot,

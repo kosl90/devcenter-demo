@@ -1,5 +1,5 @@
 const session = require('express-session');
-const config = require('../../../config');
+const config = require('../../config');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -27,6 +27,4 @@ if (isProd) {
   sessionOpt.store = sessionStore;
 }
 
-module.exports = (app) => {
-  app.use(session(sessionOpt));
-};
+module.exports = session(sessionOpt);

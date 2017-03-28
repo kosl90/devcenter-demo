@@ -1,5 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
-var path = require('path')
+var path = require('path');
+const serverConfig = require('./server');
 
 const projectRoot = path.resolve(__dirname, '..');
 const clientRoot = path.resolve(__dirname, '../client');
@@ -17,14 +18,13 @@ const config = {
   clientRoot,
   serverRoot,
   staticRoot,
-  viewDirectory: './views',
+  viewDirectory: './src/views',
   sessionStore: require('./session'),
   server: Object.assign({
     type: 'http',  // http/https/http2
-  }, require('./server'), {
-      host: 'localhost',
-      port: 8080,
-    }),
+    host: 'localhost',
+    port: 8080,
+  }, serverConfig),
   build: {
     env: require('./env/prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),

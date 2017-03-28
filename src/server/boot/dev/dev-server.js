@@ -5,12 +5,12 @@ const nodemon = require('nodemon');
 const serverCompiler = require('./webpack.server');
 
 let first = true;
-const mainScript = './server/main.js';
+const mainScript = './src/server/main.js';
 
 // TODO: tune parameters
 nodemon({
   script: mainScript,
-  watch: [path.resolve('./server')],
+  watch: [path.resolve('./src/server')],
   ignore: ['dev-server.js'],
 })
   .on('start', () => {

@@ -19,10 +19,6 @@ function resolve(dir) {
 }
 
 var webpackConfig = {
-  // entry: {
-  //   app: './client/main.js',
-  //   login: './client/login.js',
-  // },
   output: {
     path: config.build.assetsRoot,
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
@@ -98,11 +94,11 @@ var webpackConfig = {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       '~config': path.resolve(__dirname, '../config'),
-      '~src': path.resolve(__dirname, '../client'),
-      '~assets': path.resolve(__dirname, '../client/assets'),
-      '~style': path.resolve(__dirname, '../client/style'),
-      '~components': path.resolve(__dirname, '../client/components'),
-      '~containers': path.resolve(__dirname, '../client/containers'),
+      '~src': path.resolve(__dirname, '../src/client'),
+      '~assets': path.resolve(__dirname, '../src/client/assets'),
+      '~style': path.resolve(__dirname, '../src/client/style'),
+      '~components': path.resolve(__dirname, '../src/client/components'),
+      '~containers': path.resolve(__dirname, '../src/client/containers'),
     }
   },
   resolveLoader: {

@@ -2,8 +2,8 @@
 const historyAPIFallback = require('connect-history-api-fallback');
 const webpack = require('webpack');  // eslint-disable-line
 const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware')
-const webpackConfig = require('../../../build/webpack.client.conf');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackConfig = require('../../../../build/webpack.client.conf');
 
 module.exports = (app) => {
   // add hot-reload related code to entry chunks

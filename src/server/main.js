@@ -1,7 +1,7 @@
-require('../build/check-versions')();
+require('../../build/check-versions')();
 const express = require('express');
 // const path = require('path');
-const config = require('../config');
+const config = require('./config');
 const setupServer = require('./boot/setup-server');
 const logger = require('./logger');
 
@@ -23,6 +23,5 @@ setupServer(app);
 app.listen(port, (err) => {
   if (err) {
     logger.error(err);
-    return;
   }
 });

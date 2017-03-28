@@ -11,8 +11,8 @@ var isProduction = config.isProd;
 
 var webpackConfig = merge(baseConfig, {
   entry: {
-    index: './client/main.js',
-    login: './client/login.js',
+    index: './src/client/main.js',
+    login: './src/client/login.js',
   },
   devtool: isProduction ?
     config.build.productionSourceMap ?
