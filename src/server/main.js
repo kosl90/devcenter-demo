@@ -1,6 +1,5 @@
 require('../../build/check-versions')();
 const express = require('express');
-// const path = require('path');
 const config = require('./config');
 const setupServer = require('./boot/setup-server');
 const logger = require('./logger');

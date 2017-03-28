@@ -4,7 +4,7 @@ const config = require('../../config');
 const isProd = process.env.NODE_ENV === 'production';
 
 const sessionOpt = {
-  secret: 'secret: →_→',  // TODO: get a better secret.
+  secret: config.SESSION_SECRET_KEY,
   resave: true,
   rolling: true,
   saveUninitialized: false,
